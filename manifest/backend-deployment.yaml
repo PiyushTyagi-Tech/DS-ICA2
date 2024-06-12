@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-app
+  template:
+    metadata:
+      labels:
+        app: backend-app
+    spec:
+      containers:
+      - name: backend
+        image: gcr.io/valid-scene-422800-s7/flask-be:GCR
+        env:
+        - name: DB_HOST
+          value: "35.232.9.242"
+        - name: DB_NAME
+          value: "flask-db"
+        - name: DB_USER
+          value: "piyush"
+        - name: DB_PASSWORD
+          value: "piyush"
+        ports:
+        - containerPort: 5000
+
