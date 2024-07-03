@@ -8,6 +8,7 @@ steps:
     args: ['container', 'clusters', 'get-credentials', '${_CLUSTER_NAME}']
     env:
       - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}'
+
   # Build the Docker image for the Flask backend
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/backend:latest', './backend']
