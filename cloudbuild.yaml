@@ -1,13 +1,13 @@
 steps:
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
-    args: ['config', 'set', 'compute/zone', '${_COMPUTE_ZONE}']
+    args: ['config', 'set', 'compute/zone', 'us-central1-a']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
-    args: ['container', 'clusters', 'get-credentials', '${_CLUSTER_NAME}']
+    args: ['container', 'clusters', 'get-credentials', 'ica-cluster']
     env:
-      - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}'
+      - 'CLOUDSDK_CONTAINER_CLUSTER= ica-cluster'
 
   # Build the Docker image for the Flask backend
   - name: 'gcr.io/cloud-builders/docker'
