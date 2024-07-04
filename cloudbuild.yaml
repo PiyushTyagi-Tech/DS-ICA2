@@ -36,19 +36,19 @@ steps:
   # Apply the Kubernetes configuration files for the backend deployment
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'manifest/backend-deployment.yaml']
-    env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-1', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
+    env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-a', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
   # Apply the Kubernetes configuration files for the backend service
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'manifest/backend-service.yaml']
-    env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-1', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
+    env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-a', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
   # Apply the Kubernetes configuration files for the frontend deployment
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'manifest/frontend-deployment.yaml']
-    env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-1', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
+    env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-a', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
   # Apply the Kubernetes configuration files for the frontend service
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'manifest/frontend-service.yaml']
-    env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-1', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
+    env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-a', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
 images:
   - 'gcr.io/$PROJECT_ID/backend:latest'
   - 'gcr.io/$PROJECT_ID/frontend:latest'
