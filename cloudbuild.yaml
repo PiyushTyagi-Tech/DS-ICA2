@@ -24,23 +24,31 @@ steps:
   # Push the frontend image to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/frontend:latest']
+   
+ # - name: 'gcr.io/cloud-builders/kubectl'
+  #  args: ['set', 'image', 'deployment/frontend-ui', 'frontend-ui=gcr.io/$PROJECT_ID/frontend-ui:$SHORT_SHA', '--namespace=default']
+   # env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-1', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
+  
+  #- name: 'gcr.io/cloud-builders/kubectl'
+  #  args: ['set', 'image', 'deployment/python-app', 'python-app=gcr.io/$PROJECT_ID/python-app:$SHORT_SHA', '--namespace=default']
+  #  env: ['CLOUDSDK_COMPUTE_ZONE=your-zone', 'CLOUDSDK_CONTAINER_CLUSTER=your-cluster']
   
   # Apply the Kubernetes configuration files for the backend deployment
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'manifest/backend-deployment.yaml']
-  
+    env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-1', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
   # Apply the Kubernetes configuration files for the backend service
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'manifest/backend-service.yaml']
-
+    env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-1', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
   # Apply the Kubernetes configuration files for the frontend deployment
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'manifest/frontend-deployment.yaml']
-  
+    env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-1', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
   # Apply the Kubernetes configuration files for the frontend service
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'manifest/frontend-service.yaml']
-
+    env: ['CLOUDSDK_COMPUTE_ZONE=us-central1-1', 'CLOUDSDK_CONTAINER_CLUSTER=ica-cluster']
 images:
   - 'gcr.io/$PROJECT_ID/backend:latest'
   - 'gcr.io/$PROJECT_ID/frontend:latest'
