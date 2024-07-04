@@ -1,8 +1,10 @@
 steps:
+  # Set the compute zone
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args: ['config', 'set', 'compute/zone', '${_COMPUTE_ZONE}']
 
+  # Get the cluster credentials
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args: ['container', 'clusters', 'get-credentials', '${_CLUSTER_NAME}']
