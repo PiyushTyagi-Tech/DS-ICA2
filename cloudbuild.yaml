@@ -1,10 +1,8 @@
 steps:
-  # Set the compute zone
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args: ['config', 'set', 'compute/zone', '${_COMPUTE_ZONE}']
 
-  # Get the cluster credentials
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     args: ['container', 'clusters', 'get-credentials', '${_CLUSTER_NAME}']
@@ -27,34 +25,21 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/frontend:latest']
   
-  # Debugging step to print environment variables
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'bash'
-    args: ['-c', 'echo "PROJECT_ID: $PROJECT_ID"; echo "COMPUTE_ZONE: $_COMPUTE_ZONE"; echo "CLUSTER_NAME: $_CLUSTER_NAME"; echo "CLOUDSDK_CONTAINER_CLUSTER: $CLOUDSDK_CONTAINER_CLUSTER"']
-
   # Apply the Kubernetes configuration files for the backend deployment
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'manifest/backend-deployment.yaml']
-    env:
-      - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}'
   
   # Apply the Kubernetes configuration files for the backend service
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'manifest/backend-service.yaml']
-    env:
-      - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}'
 
   # Apply the Kubernetes configuration files for the frontend deployment
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'manifest/frontend-deployment.yaml']
-    env:
-      - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}'
   
   # Apply the Kubernetes configuration files for the frontend service
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'manifest/frontend-service.yaml']
-    env:
-      - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLUSTER_NAME}'
 
 images:
   - 'gcr.io/$PROJECT_ID/backend:latest'
