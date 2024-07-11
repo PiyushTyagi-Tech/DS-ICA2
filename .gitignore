@@ -4,7 +4,7 @@
 *.tfstate
 *.tfstate.*
 
-valid-scene-422800-s7e895fc6d5ec6.json
+*valid-scene-422800-s7e895fc6d5ec6.json
 crash.log
 crash.*.log
 
