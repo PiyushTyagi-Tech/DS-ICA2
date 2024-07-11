@@ -29,3 +29,15 @@ resource "google_container_cluster" "primary" {
   deletion_protection = false
 }
 
+#Create Kubernetes Namespaces
+resource "kubernetes_namespace" "backend" {
+  metadata {
+    name = "backend"
+  }
+}
+
+resource "kubernetes_namespace" "frontend" {
+  metadata {
+    name = "frontend"
+  }
+}
