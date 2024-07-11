@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = file("D:/ICA-2-DS/valid-scene-422800-s7-e895fc6d5ec6.json")
+  credentials = file("D:/ICA-2-DS/valid-scene-422800-s7-1b90f68320e3.json")
   project     = "valid-scene-422800-s7"
   region      = "us-central1"
   zone        = "us-central1-a"
